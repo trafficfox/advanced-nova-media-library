@@ -174,12 +174,13 @@ class Media extends Field
         };
     }
 
-    protected function handleMedia(NovaRequest $request, $model, $attribute, $data)
+     protected function handleMedia(NovaRequest $request, $model, $attribute, $data)
     {
         $remainingIds = $this->removeDeletedMedia($data, $model->getMedia($attribute));
         $newIds = $this->addNewMedia($request, $data, $model, $attribute);
-        $existingIds = $this->addExistingMedia($request, $data, $model, $attribute, $model->getMedia($attribute));
-        $this->setOrder($remainingIds->union($newIds)->union($existingIds)->sortKeys()->all());
+        // $existingIds = $this->addExistingMedia($request, $data, $model, $attribute, $model->getMedia($attribute));
+        // $this->setOrder($remainingIds->union($newIds)->union($existingIds)->sortKeys()->all());
+        $this->setOrder($remainingIds->union($newIds)->sortKeys()->all());
     }
 
     private function setOrder($ids)
